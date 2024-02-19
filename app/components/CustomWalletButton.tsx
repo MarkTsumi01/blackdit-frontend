@@ -4,65 +4,32 @@ import React, { useEffect, useState } from "react";
 import { ConnectButton, AuthenticationStatus } from "@rainbow-me/rainbowkit";
 import { useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
-import { signMessage } from "@wagmi/core";
 import axios from "axios";
 import Image from "next/image";
-import { config } from "../config";
+import { ethers } from "ethers";
 
 const CustomWalletButton = () => {
   const router = useRouter();
-  const [signMessage, setSignMessage] = useState("");
   const { address } = useAccount();
+  const [forConnect, setForConnect] = useState(false);
 
-  const saveUser = async () => {
-    try {
-      let response = await axios.post(
-        "http://localhost:3001/api/users/createuser",
-        {
-          wallet_address: `${address}`,
-        }
-      );
-
-      const { message, data } = response.data;
-      console.log(message);
-
-      if (message === "the user already in database") {
-        // router.push("/dashboard");
-        console.log(message);
-      }
-      if (message === "create new user") {
-        // router.push("/updateuser");
-        console.log(message);
-      }
-    } catch (error) {
-      console.log("Error", error);
-    }
-  };
-
-  const getSignMessage = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:3001/api/auth/getMessage"
-      );
-
-      const { message } = response.data;
-      setSignMessage(message);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const logInBlackdit = async () => {
-    const result = await axios.get("http://localhost:3001/api/auth/getMessage");
+  const logIn = async () => {
+    const baseurl = "http://localhost:3001/api";
+    const result = await axios.get(`${baseurl}/auth/getMessage`);
     const { message } = result.data;
-    const results = await signMessage(config, {
-      message: message,
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const signature = await signer.signMessage(message);
+    const accessToken = await axios.post(`${baseurl}/auth/login`, {
+      signatures: signature,
     });
+    localStorage.setItem("accessToken", accessToken?.data.data.accessToken);
   };
 
   const handleConectButton = async () => {
-    logInBlackdit();
-    // await saveUser();
+    setForConnect(true);
+    await logIn();
+    router.push("/information");
   };
 
   return (
@@ -82,6 +49,11 @@ const CustomWalletButton = () => {
           account &&
           chain &&
           (!authenticationStatus || authenticationStatus === "authenticated");
+
+        if (connected && !forConnect) {
+          console.log(connected);
+          handleConectButton();
+        }
 
         return (
           <div
@@ -106,9 +78,7 @@ const CustomWalletButton = () => {
                   </button>
                 );
               }
-              if (connected) {
-                handleConectButton();
-              }
+
               if (chain.unsupported) {
                 return (
                   <button onClick={openChainModal} type="button">
