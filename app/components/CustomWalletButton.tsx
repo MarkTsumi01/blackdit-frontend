@@ -1,5 +1,70 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-export const YourApp = () => {
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { ConnectButton, AuthenticationStatus } from "@rainbow-me/rainbowkit";
+import { useRouter } from "next/navigation";
+import { useAccount } from "wagmi";
+import { signMessage } from "@wagmi/core";
+import axios from "axios";
+import Image from "next/image";
+import { config } from "../config";
+
+const CustomWalletButton = () => {
+  const router = useRouter();
+  const [signMessage, setSignMessage] = useState("");
+  const { address } = useAccount();
+
+  const saveUser = async () => {
+    try {
+      let response = await axios.post(
+        "http://localhost:3001/api/users/createuser",
+        {
+          wallet_address: `${address}`,
+        }
+      );
+
+      const { message, data } = response.data;
+      console.log(message);
+
+      if (message === "the user already in database") {
+        // router.push("/dashboard");
+        console.log(message);
+      }
+      if (message === "create new user") {
+        // router.push("/updateuser");
+        console.log(message);
+      }
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+
+  const getSignMessage = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3001/api/auth/getMessage"
+      );
+
+      const { message } = response.data;
+      setSignMessage(message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const logInBlackdit = async () => {
+    const result = await axios.get("http://localhost:3001/api/auth/getMessage");
+    const { message } = result.data;
+    const results = await signMessage(config, {
+      message: message,
+    });
+  };
+
+  const handleConectButton = async () => {
+    logInBlackdit();
+    // await saveUser();
+  };
+
   return (
     <ConnectButton.Custom>
       {({
@@ -11,14 +76,13 @@ export const YourApp = () => {
         authenticationStatus,
         mounted,
       }) => {
-        // Note: If your app doesn't use authentication, you
-        // can remove all 'authenticationStatus' checks
         const ready = mounted && authenticationStatus !== "loading";
         const connected =
           ready &&
           account &&
           chain &&
           (!authenticationStatus || authenticationStatus === "authenticated");
+
         return (
           <div
             {...(!ready && {
@@ -33,10 +97,17 @@ export const YourApp = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <button onClick={openConnectModal} type="button">
+                  <button
+                    onClick={openConnectModal}
+                    className="bg-secondary p-4 rounded-large font-semibold"
+                    type="button"
+                  >
                     Connect Wallet
                   </button>
                 );
+              }
+              if (connected) {
+                handleConectButton();
               }
               if (chain.unsupported) {
                 return (
@@ -64,10 +135,11 @@ export const YourApp = () => {
                         }}
                       >
                         {chain.iconUrl && (
-                          <img
+                          <Image
                             alt={chain.name ?? "Chain icon"}
                             src={chain.iconUrl}
-                            style={{ width: 12, height: 12 }}
+                            width={12}
+                            height={12}
                           />
                         )}
                       </div>
@@ -89,3 +161,5 @@ export const YourApp = () => {
     </ConnectButton.Custom>
   );
 };
+
+export default CustomWalletButton;

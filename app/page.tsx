@@ -1,15 +1,16 @@
 import { Divider } from "@nextui-org/react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import ProjectLogo from "./logo/ProjectLogo";
+import CustomWalletButton from "./components/CustomWalletButton";
 
-export default function Home() {
+export default function Login() {
   return (
     <main className="min-h-screen flex justify-center items-center">
-      <div className="flex flex-col items-center gap-6 p-6 rounded-large bg-secondary-foreground">
+      {/* Login */}
+      <div className="flex flex-col items-center gap-6 p-16 rounded-large bg-secondary-foreground ">
         <ProjectLogo />
-        <h1>Welcome to Blackdit</h1>
+        <h1 className="font-semibold text-large">Welcome to Blackdit</h1>
         <Divider />
-        <ConnectButton />
+        <CustomWalletButton />
       </div>
     </main>
   );
