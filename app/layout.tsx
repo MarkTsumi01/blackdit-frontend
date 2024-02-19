@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import WrapNextUI from "./components/WrapNextUI";
+import WrapRainbowkit from "./components/WrapRainbowKit";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <WrapNextUI>
-        <body className={inter.className}>{children}</body>
-      </WrapNextUI>
+      <WrapRainbowkit>
+        <WrapNextUI>
+          <body className={inter.className}>{children}</body>
+        </WrapNextUI>
+      </WrapRainbowkit>
     </html>
   );
 }
