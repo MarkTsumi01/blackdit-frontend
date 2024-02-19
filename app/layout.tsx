@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import WrapNextUI from "./components/WrapNextUI";
+import WrapRainbowkit from "./components/WrapRainbowKit";
+import WrapNextTheme from "./components/WrapNextTheme";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +19,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <WrapNextTheme>
+        <WrapRainbowkit>
+          <WrapNextUI>
+            <body className={inter.className}>
+              <main className="dark text-foreground bg-background">
+                {children}
+              </main>
+            </body>
+          </WrapNextUI>
+        </WrapRainbowkit>
+      </WrapNextTheme>
     </html>
   );
 }
