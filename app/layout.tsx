@@ -20,7 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <WrapRainbowkit>
         <WrapNextUI>
-          <body className={inter.className}>{children}</body>
+          <body className={inter.className}>
+            <main className="dark text-foreground bg-background">
+              {children}
+            </main>
+          </body>
         </WrapNextUI>
       </WrapRainbowkit>
     </html>
