@@ -71,7 +71,7 @@ const CustomWalletButton = () => {
                 return (
                   <button
                     onClick={openConnectModal}
-                    className="bg-secondary p-4 rounded-large font-semibold"
+                    className="bg-secondary p-4 rounded-large font-semibold text-white"
                     type="button"
                   >
                     Connect Wallet
