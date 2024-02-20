@@ -50,15 +50,15 @@ const config: Config = {
       themes: {
         light: {
           colors: {
-            background: "#FFFFFF",
-            foreground: "#000000", //font color
+            background: "#ffffff",
+            foreground: "#0f172a", //font color
             default: "#0B154B",
             primary: {
               foreground: "#A3A3A3",
               DEFAULT: "#F0B09D",
             },
             secondary: {
-              foreground: "#D9D9D9",
+              foreground: "#fdfdfe",
               DEFAULT: "#006FEE",
             },
             divider: "#EFEFEF",

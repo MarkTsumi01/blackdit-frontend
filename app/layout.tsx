@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Open_Sans } from "next/font/google";
 import "./globals.css";
 import WrapNextUI from "./components/WrapNextUI";
 import WrapRainbowkit from "./components/WrapRainbowKit";
 import WrapNextTheme from "./components/WrapNextTheme";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
+const open = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Blackdit | miniproject",
@@ -22,8 +23,8 @@ export default function RootLayout({
       <WrapNextTheme>
         <WrapRainbowkit>
           <WrapNextUI>
-            <body className={inter.className}>
-              <main className="dark text-foreground bg-background">
+            <body className={open.className}>
+              <main className="light text-foreground bg-background">
                 {children}
               </main>
             </body>
