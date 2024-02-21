@@ -4,8 +4,9 @@ import "../globals.css";
 import WrapNextTheme from "../components/WrapNextTheme";
 import WrapNextUI from "../components/WrapNextUI";
 import WrapRainbowkit from "../components/WrapRainbowKit";
+import NavigationBar from "../components/Navbar/Navbar";
+import Sidebar from "../components/Sidebar/Sidebar";
 
-// const inter = Inter({ subsets: ["latin"] });
 const open = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,9 +25,17 @@ export default function RootLayout({
         <WrapRainbowkit>
           <WrapNextUI>
             <body className={open.className}>
-              <main className="light text-foreground bg-background">
-                {children}
-              </main>
+              <div className="dark text-foreground bg-background ">
+                <div>
+                  <NavigationBar />
+                  <div className="flex flex-row gap-9">
+                    <Sidebar />
+                    <div className="container max-w-7xl  mx-auto  min-h-screen">
+                      {children}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </body>
           </WrapNextUI>
         </WrapRainbowkit>
