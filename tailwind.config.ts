@@ -55,29 +55,29 @@ const config: Config = {
             default: "#0B154B",
             primary: {
               foreground: "#A3A3A3",
-              DEFAULT: "#F0B09D",
+              DEFAULT: "#A2A2A2",
             },
             secondary: {
               foreground: "#fdfdfe",
               DEFAULT: "#006FEE",
             },
-            divider: "#EFEFEF",
+            divider: "#dcdcdc",
           },
         },
         dark: {
           colors: {
-            background: "#000000",
+            background: "#0e1217",
             foreground: "#FFFFFF", //font color
             default: "#0B154B",
             primary: {
-              foreground: "#A3A3A3",
-              DEFAULT: "#F0B09D",
+              foreground: "#a8b3cf",
+              DEFAULT: "#1c1f26",
             },
             secondary: {
               foreground: "#0e0c0c",
               DEFAULT: "#006FEE",
             },
-            divider: "#EFEFEF",
+            divider: "#2d323b",
           },
         },
       },

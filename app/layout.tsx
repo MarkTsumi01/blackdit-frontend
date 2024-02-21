@@ -24,7 +24,7 @@ export default function RootLayout({
         <WrapRainbowkit>
           <WrapNextUI>
             <body className={open.className}>
-              <main className="light text-foreground bg-background">
+              <main className="dark text-foreground bg-background">
                 {children}
               </main>
             </body>

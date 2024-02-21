@@ -24,6 +24,8 @@ const CustomWalletButton = () => {
       signatures: signature,
     });
     localStorage.setItem("accessToken", accessToken?.data.data.accessToken);
+
+    console.log(accessToken, "frontend");
   };
 
   const handleConectButton = async () => {
