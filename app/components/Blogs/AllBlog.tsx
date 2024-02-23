@@ -8,14 +8,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
   Skeleton,
-  useDisclosure,
   Image,
 } from "@nextui-org/react";
 import { useGetAllBlogs } from "@/app/hooks/useGetAllBlogs";
@@ -31,27 +24,22 @@ const AllBlog = () => {
       {loading ? (
         <div>loading ...</div>
       ) : (
-        <div className="max-w-9/12 w-full mt-10">
-          <h1 className=" pl-20 text-large font-bold text-primary-foreground">
-            All Blogs
-          </h1>
+        <div className="max-w-9/12 w-full mt-10 min-h-screen  ">
+          <h1 className=" pl-20 text-large  text-primary">All Blogs</h1>
 
-          <div className="grid grid-cols-3 p-10 rounded-md gap-10 text-foreground">
+          <div className="grid grid-cols-3 p-10 rounded-md gap-10 text-primary">
             {blogdata?.map((blog, index) => (
               <>
                 <Link href={`dashboard/${blog.id}`}>
                   <Card
                     isPressable
-                    className="p-2 bg-primary rounded-md shadow-lg  text-foreground border-[1px] border-divider"
+                    className="p-2 bg-background rounded-md shadow-lg  text-primary border-[1px] border-divider max-h-96 h-full"
                     key={index}
                   >
                     <CardHeader className="pb-0 pt-2 px-4 flex-col gap-4 items-start">
                       <Skeleton className="rounded-lg" isLoaded={!loading}>
                         <div className="flex gap-4 justify-center items-center parent">
-                          <Avatar
-                            color="primary"
-                            src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-                          />
+                          <Avatar color="primary" src={blog.user.imagePath} />
                         </div>
                       </Skeleton>
 
@@ -60,11 +48,6 @@ const AllBlog = () => {
                           {blog.title}
                         </h4>
                       </Skeleton>
-                      {/* <Skeleton className="rounded-lg" isLoaded={!loading}>
-                      <h4 className="font-bold text-medium p-2 text-left text-primary-foreground">
-                        {blog.body}
-                      </h4>
-                    </Skeleton> */}
                     </CardHeader>
                     <CardBody className="overflow-visible">
                       <Skeleton className="rounded-lg" isLoaded={!loading}>
@@ -81,13 +64,13 @@ const AllBlog = () => {
                     <CardFooter>
                       <Button
                         onPress={() => router.push(`dashboard/${blog.id}`)}
-                        className="p-4 text-large text-foreground font-bold  w-full"
+                        className="p-4 text-large text-white  font-bold  w-full"
                         variant="shadow"
                         color="secondary"
                         radius="md"
                         size="lg"
                       >
-                        Read Post
+                        READ
                       </Button>
                     </CardFooter>
                   </Card>

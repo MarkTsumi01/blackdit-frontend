@@ -4,6 +4,7 @@ import "./globals.css";
 import WrapNextUI from "./components/WrapNextUI";
 import WrapRainbowkit from "./components/WrapRainbowKit";
 import WrapNextTheme from "./components/WrapNextTheme";
+import AuthProvider from "./providers/AuthProvider";
 
 // const inter = Inter({ subsets: ["latin"] });
 const open = Open_Sans({ subsets: ["latin"] });
@@ -23,11 +24,13 @@ export default function RootLayout({
       <WrapNextTheme>
         <WrapRainbowkit>
           <WrapNextUI>
+            {/* <AuthProvider> */}
             <body className={open.className}>
-              <main className="dark text-foreground bg-background">
+              <main className="light text-primary bg-background">
                 {children}
               </main>
             </body>
+            {/* </AuthProvider> */}
           </WrapNextUI>
         </WrapRainbowkit>
       </WrapNextTheme>

@@ -8,14 +8,10 @@ import {
   ListboxItem,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import { useAccountModal } from "@rainbow-me/rainbowkit";
+import { ContentIcon } from "@/app/icons/Sidebar/Content";
 
 export default function Sidebar() {
-  //create variable to use rounter function
   const router = useRouter();
-
-  // hooks from rainbowkit
-  const { openAccountModal } = useAccountModal();
 
   return (
     // Sidebar
@@ -24,13 +20,13 @@ export default function Sidebar() {
         {/* Accordion next-ui   */}
         <Accordion itemClasses={{ base: "w-52" }}>
           <AccordionItem
-            // startContent={<IconLogo />}
+            startContent={<ContentIcon />}
             key="1"
             aria-label="property"
             title="Features"
             classNames={{
-              title: "text-foreground pl-4 ",
-              trigger: "text-foreground ",
+              title: "text-primary pl-4 ",
+              trigger: "text-primary ",
               startContent: " pl-4",
             }}
           >
@@ -51,7 +47,7 @@ export default function Sidebar() {
               <ListboxItem
                 key="create"
                 onClick={() => router.push("/dashboard/createblog")}
-                className="p-4 pl-12 pr-6 text-base font-normal "
+                className="p-4 pl-12 pr-6 text-base font-normal"
               >
                 Create
               </ListboxItem>
