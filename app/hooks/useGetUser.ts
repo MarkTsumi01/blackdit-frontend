@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { IBlogs } from "../interfaces/blog/blogs.interface";
+import { IUser } from "../interfaces/user/user.interface";
 
-export const useGetByID = (id: string) => {
-  const [blogByID, setblogByID] = useState<IBlogs[] | null>(null);
+export const useGetUser = () => {
+  const [userData, setUserdata] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -13,11 +14,8 @@ export const useGetByID = (id: string) => {
         const config = {
           headers: { Authorization: `Bearer ${accesstoken}` },
         };
-        const res = await axios.get(
-          `http://localhost:3001/api/posts/${id}`,
-          config
-        );
-        setblogByID(res.data);
+        const res = await axios.get("http://localhost:3001/api/users/", config);
+        setUserdata(res.data);
         console.log(res.data, "data");
 
         setLoading(false);
@@ -29,5 +27,5 @@ export const useGetByID = (id: string) => {
     fetchData();
   }, []);
 
-  return { blogByID, loading };
+  return { userData, loading };
 };

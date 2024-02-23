@@ -36,7 +36,6 @@ export default function Sidebar() {
           >
             {/* Listbox next-ui  */}
             <Listbox
-              selectionMode="single"
               aria-label="Actions"
               variant="flat"
               color="secondary"
@@ -51,7 +50,7 @@ export default function Sidebar() {
               </ListboxItem>
               <ListboxItem
                 key="create"
-                onClick={() => router.push("/createblog")}
+                onClick={() => router.push("/dashboard/createblog")}
                 className="p-4 pl-12 pr-6 text-base font-normal "
               >
                 Create
@@ -68,15 +67,7 @@ export default function Sidebar() {
         </Accordion>
       </div>
       <div>
-        <div className="flex gap-2 pl-6">
-          {/* <SignoutIcon /> */}
-          <button
-            className="text-slate-500 font-semibold text-base"
-            onClick={openAccountModal}
-          >
-            Sign out
-          </button>
-        </div>
+        <div className="flex gap-2 pl-6"></div>
       </div>
     </div>
   );

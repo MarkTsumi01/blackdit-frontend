@@ -22,10 +22,14 @@ import { useTheme } from "next-themes";
 import { SunIcon } from "@/app/icons/SunIcon";
 import { MoonIcon } from "@/app/icons/MoonIcon";
 import { useAccountModal } from "@rainbow-me/rainbowkit";
+import { useGetUser } from "@/app/hooks/useGetUser";
 
 export default function Nav() {
   const rounter = useRouter();
   const { openAccountModal } = useAccountModal();
+  const { userData, loading } = useGetUser();
+
+  console.log(userData);
 
   return (
     <Navbar
@@ -38,27 +42,12 @@ export default function Nav() {
         </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-6" justify="center">
-        {/* <NavbarItem>
-          <Link color="foreground" href="/dashboard">
-            Blog
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href="/createblog" color="foreground">
-            Create
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="/dashboard">
-            Profile
-          </Link>
-        </NavbarItem> */}
-        <Switch
+        {/* <Switch
           size="lg"
           color="success"
           startContent={<SunIcon />}
           endContent={<MoonIcon />}
-        ></Switch>
+        ></Switch> */}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
@@ -72,11 +61,11 @@ export default function Nav() {
                 <User
                   as="button"
                   avatarProps={{
-                    src: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+                    src: "https://bungalower.com/wp-content/uploads/2018/08/cat.jpg",
                   }}
                   className="transition-transform"
-                  description="@marktsumi"
-                  name="Kanravee"
+                  description={userData?.username}
+                  name={userData?.fullname}
                 />
               </DropdownTrigger>
               <DropdownMenu
