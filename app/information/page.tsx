@@ -1,7 +1,6 @@
 "use client";
 import { Input, Divider, Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
-import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
@@ -20,7 +19,6 @@ const InFormation = () => {
     setAccesstoken(token);
   }, []);
 
-  // Config for send accesstoken in header
   const config = {
     headers: { Authorization: `Bearer ${accessToken}` },
     "Content-Type": "multipart/form-data",
@@ -28,7 +26,7 @@ const InFormation = () => {
 
   const updateUser = async () => {
     try {
-      const response = await axios.patch(
+      const response = await axios.put(
         "http://localhost:3001/api/users/updateuser",
         formData,
         config
@@ -39,7 +37,7 @@ const InFormation = () => {
     }
   };
 
-  const updateImage = async (file) => {
+  const updateImage = async (file: string | Blob) => {
     try {
       const imageData = new FormData();
       imageData.append("image", file);
@@ -69,14 +67,12 @@ const InFormation = () => {
   const handleFormSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     updateUser();
-    router.push("/dashboard");
+    // router.push("/dashboard");
   };
 
   const handleInputChange = (e: { target: { name: any; value: any } }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  const handleClear = () => {};
 
   return (
     <main className="min-h-screen flex justify-center items-center ">
@@ -95,7 +91,7 @@ const InFormation = () => {
             name="fullname"
             value={formData.fullname}
             onChange={handleInputChange}
-            onClear={() => handleClear()}
+            // onClear={() => handleClear()}
           />
           <Input
             color="secondary"

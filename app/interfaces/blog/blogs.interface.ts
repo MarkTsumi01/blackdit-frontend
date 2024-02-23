@@ -2,7 +2,7 @@ export interface IBlogs {
   id: number;
   title: string;
   body: string;
-  img_url: string;
+  imagePath: string;
   user: User;
   comments: any[];
 }
@@ -13,5 +13,5 @@ export interface User {
   fullname: string;
   username: string;
   role: string;
-  img_url: any;
+  imagePath: any;
 }

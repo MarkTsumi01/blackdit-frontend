@@ -6,6 +6,7 @@ import WrapNextUI from "../components/WrapNextUI";
 import WrapRainbowkit from "../components/WrapRainbowKit";
 import NavigationBar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
+import AuthProvider from "../providers/AuthProvider";
 
 const open = Open_Sans({ subsets: ["latin"] });
 
@@ -21,10 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <WrapNextTheme>
-        <WrapRainbowkit>
-          <WrapNextUI>
-            <body className={open.className}>
+      <AuthProvider>
+        <WrapNextTheme>
+          <WrapRainbowkit>
+            <WrapNextUI>
+              {/* <body className={open.className}> */}
               <div className="dark text-foreground bg-background ">
                 <div>
                   <NavigationBar />
@@ -36,10 +38,11 @@ export default function RootLayout({
                   </div>
                 </div>
               </div>
-            </body>
-          </WrapNextUI>
-        </WrapRainbowkit>
-      </WrapNextTheme>
+              {/* </body> */}
+            </WrapNextUI>
+          </WrapRainbowkit>
+        </WrapNextTheme>
+      </AuthProvider>
     </html>
   );
 }
