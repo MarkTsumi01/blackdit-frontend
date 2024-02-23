@@ -8,7 +8,7 @@ export default function Login() {
       {/* Login */}
       <div className="flex flex-col items-center gap-6 p-16 rounded-large bg-background drop-shadow-xl border-[1px] border-divider ">
         <ProjectLogo />
-        <h1 className="font-semibold text-2xl text-foreground">
+        <h1 className="font-semibold text-2xl text-primary">
           Welcome to Blackdit
         </h1>
         <Divider />

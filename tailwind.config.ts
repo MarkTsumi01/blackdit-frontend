@@ -51,14 +51,14 @@ const config: Config = {
         light: {
           colors: {
             background: "#ffffff",
-            foreground: "#0f172a", //font color
+            foreground: "#303030", //font color
             default: "#0B154B",
             primary: {
               foreground: "#A3A3A3",
-              DEFAULT: "#A2A2A2",
+              DEFAULT: "#303030",
             },
             secondary: {
-              foreground: "#fdfdfe",
+              foreground: "#ebebeb",
               DEFAULT: "#006FEE",
             },
             divider: "#dcdcdc",

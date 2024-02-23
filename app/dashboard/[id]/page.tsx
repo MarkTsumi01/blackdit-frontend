@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { Button, Divider, Input, User, Image, Avatar } from "@nextui-org/react";
 import axios from "axios";
 import { IBlogs } from "@/app/interfaces/blog/blogs.interface";
+import { useGetUser } from "@/app/hooks/useGetUser";
 
 const Page = () => {
   const { id } = useParams();
@@ -12,6 +13,7 @@ const Page = () => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [commentDatas, setCommentData] = useState("");
+  const { userData } = useGetUser();
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -71,16 +73,18 @@ const Page = () => {
     setCommentData(e.target.value);
   };
 
+  const src = blogByID?.user.imagePath;
+
   return (
     <>
-      <main className="w-full h-full p-28">
+      <main className="w-full h-full p-16">
         <div className="p-6 flex flex-col gap-4 border-2 border-divider rounded-large">
           <div className="flex justify-between">
             <h1 className="flex items-center text-large">{blogByID?.title}</h1>
             <User
               as="button"
               avatarProps={{
-                src: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+                src: src,
               }}
               className="transition-transform"
               description={blogByID?.user.username}
@@ -108,21 +112,12 @@ const Page = () => {
             onChange={handleInputChange}
             type="text"
             placeholder="Share your thought ..."
-            startContent={
-              <User
-                as="button"
-                avatarProps={{
-                  src: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-                }}
-                className="transition-transform"
-                name
-              />
-            }
+            startContent={<Avatar src={userData?.imagePath} />}
           />
           <Button
             type="submit"
             color="success"
-            className="text-foreground font-bold"
+            className="text-white font-bold"
             variant="shadow"
           >
             Comment
@@ -130,7 +125,7 @@ const Page = () => {
         </form>
 
         <div className="flex flex-col gap-4 mt-4 text-large font-bold">
-          <h1 className="text-foreground">All Comments</h1>
+          <h1 className="text-primary">All Comments</h1>
           <Divider />
         </div>
         {blogByID?.comments.map((comment) => (
@@ -139,7 +134,11 @@ const Page = () => {
             className="mt-4 border-1 border-divider flex items-center p-6 rounded-large"
           >
             <div className="flex flex-col gap-4">
-              <Avatar showFallback src="https://images.unsplash.com/broken" />
+              <Avatar
+                showFallback
+                src="https://images.unsplash.com/broken"
+                className="text-white"
+              />
               <h1>{comment.commentText}</h1>
             </div>
           </div>

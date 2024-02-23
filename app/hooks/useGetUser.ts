@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { IBlogs } from "../interfaces/blog/blogs.interface";
 import { IUser } from "../interfaces/user/user.interface";
 
 export const useGetUser = () => {

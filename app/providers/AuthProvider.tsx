@@ -14,11 +14,11 @@ export default function AuthProvider({
   const router = useRouter();
   const { address } = useAccount();
 
-  //   useEffect(() => {
-  //     if (!address && path !== "/") {
-  //       router.push("/");
-  //     }
-  //   }, [address, path, router]);
+  useEffect(() => {
+    if (!address && path !== "/dashboard") {
+      router.push("/dashboard");
+    }
+  }, [address, path, router]);
 
   return <>{children}</>;
 }

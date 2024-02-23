@@ -23,13 +23,11 @@ import { SunIcon } from "@/app/icons/SunIcon";
 import { MoonIcon } from "@/app/icons/MoonIcon";
 import { useAccountModal } from "@rainbow-me/rainbowkit";
 import { useGetUser } from "@/app/hooks/useGetUser";
-
+import NavbarWallet from "../WalletForNavbar";
 export default function Nav() {
   const rounter = useRouter();
   const { openAccountModal } = useAccountModal();
   const { userData, loading } = useGetUser();
-
-  console.log(userData);
 
   return (
     <Navbar
@@ -42,12 +40,7 @@ export default function Nav() {
         </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-6" justify="center">
-        {/* <Switch
-          size="lg"
-          color="success"
-          startContent={<SunIcon />}
-          endContent={<MoonIcon />}
-        ></Switch> */}
+        <NavbarWallet />
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
@@ -58,15 +51,7 @@ export default function Nav() {
               className="bg-background"
             >
               <DropdownTrigger>
-                <User
-                  as="button"
-                  avatarProps={{
-                    src: "https://bungalower.com/wp-content/uploads/2018/08/cat.jpg",
-                  }}
-                  className="transition-transform"
-                  description={userData?.username}
-                  name={userData?.fullname}
-                />
+                <Avatar src={userData?.imagePath} color="success" isBordered />
               </DropdownTrigger>
               <DropdownMenu
                 aria-label="User Actions"
@@ -74,8 +59,10 @@ export default function Nav() {
                 color="secondary"
               >
                 <DropdownItem key="profile" className="h-14 gap-2">
-                  <p className="font-bold">Signed in as</p>
-                  <p className="font-bold">@tonyreichert</p>
+                  <Link href="/profile">
+                    <p className="font-bold">Signed in as</p>
+                    <p className="font-bold">@{userData?.username}</p>
+                  </Link>
                 </DropdownItem>
 
                 <DropdownItem

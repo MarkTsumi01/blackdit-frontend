@@ -22,27 +22,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <WrapNextTheme>
-        <WrapRainbowkit>
-          <WrapNextUI>
-            {/* <body className={open.className}> */}
-            {/* <AuthProvider> */}
-            <div className="light text-primary bg-background ">
-              <div>
-                <NavigationBar />
-                <div className="flex flex-row gap-9">
-                  <Sidebar />
-                  <div className="container max-w-7xl  mx-auto  min-h-screen">
-                    {children}
+      <AuthProvider>
+        <WrapNextTheme>
+          <WrapRainbowkit>
+            <WrapNextUI>
+              {/* <body className={open.className}> */}
+              <AuthProvider>
+                <div className="light text-primary bg-background ">
+                  <div>
+                    <NavigationBar />
+                    <div className="flex flex-row gap-9">
+                      <Sidebar />
+                      <div className="container max-w-7xl  mx-auto  min-h-screen">
+                        {children}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            {/* </AuthProvider> */}
-            {/* </body> */}
-          </WrapNextUI>
-        </WrapRainbowkit>
-      </WrapNextTheme>
+              </AuthProvider>
+              {/* </body> */}
+            </WrapNextUI>
+          </WrapRainbowkit>
+        </WrapNextTheme>
+      </AuthProvider>
     </html>
   );
 }

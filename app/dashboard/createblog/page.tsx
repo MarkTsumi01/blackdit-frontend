@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { Button, Divider, Input, Textarea } from "@nextui-org/react";
 import axios from "axios";
@@ -26,17 +25,26 @@ const CreatePost = () => {
 
   const createPost = async () => {
     try {
-      const postData = new FormData();
-      postData.append("title", formData.title);
-      postData.append("body", formData.body);
-      postData.append("image", formData.image);
+      // const postData = new FormData();
+      // postData.append("title", formData.title);
+      // postData.append("body", formData.body);
+      // postData.append("image", formData.image);
+      // const response = await axios.post(
+      //   "http://localhost:3001/api/posts/createpost",
+      //   postData,
+      //   config
+      // );
+
       const response = await axios.post(
         "http://localhost:3001/api/posts/createpost",
-        postData,
+        {
+          title: formData.title,
+          body: formData.body,
+          image: formData.image,
+        },
         config
       );
       console.log(response.data, "API Data");
-      console.log(postData, "this is PostData");
     } catch (error) {
       console.error("Error", error);
     }
@@ -60,7 +68,7 @@ const CreatePost = () => {
 
   return (
     <main className=" w-full h-full p-28">
-      <div className="p-4 flex flex-col gap-4 border-2 border-divider rounded-large">
+      <div className="p-4 flex flex-col gap-4 border-2 border-divider rounded-large bg-backgroundid">
         <h1>Create Blog</h1>
         <Divider />
         <form onSubmit={handleFormSubmit} className="flex flex-col gap-1">
@@ -93,7 +101,7 @@ const CreatePost = () => {
             color="secondary"
             type="file"
             variant="bordered"
-            className="p-4"
+            className="p-4 text-primary"
             name="image"
             onChange={handleFileChange}
           />
@@ -101,11 +109,11 @@ const CreatePost = () => {
             <Button
               type="submit"
               color="success"
-              className="text-foreground font-bold"
+              className="text-white   font-bold"
             >
               Save
             </Button>
-            <Button color="danger" className="text-foreground font-bold">
+            <Button color="danger" className="text-white font-bold">
               Cancel
             </Button>
           </div>

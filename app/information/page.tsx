@@ -67,7 +67,7 @@ const InFormation = () => {
   const handleFormSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     updateUser();
-    // router.push("/dashboard");
+    router.push("/dashboard");
   };
 
   const handleInputChange = (e: { target: { name: any; value: any } }) => {
