@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IBlogs } from "../interfaces/blog/blogs.interface";
 
 export const useGetAllBlogs = () => {
@@ -18,7 +18,7 @@ export const useGetAllBlogs = () => {
           config
         );
         setBlogdata(res.data);
-        console.log(res.data, "data");
+        // console.log(res.data, "data");
 
         setLoading(false);
       } catch (error) {
@@ -30,4 +30,26 @@ export const useGetAllBlogs = () => {
   }, []);
 
   return { blogdata, loading };
+};
+
+interface IFilterData {
+  search: string;
+}
+
+export const useGetFilteredData = ({ search }: IFilterData) => {
+  const { blogdata } = useGetAllBlogs();
+
+  const filteredData = useMemo(() => {
+    if (!blogdata) return [];
+
+    return blogdata.filter((blog) => {
+      const nameMatches = blog.title
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
+      return nameMatches;
+    });
+  }, [blogdata, search]);
+
+  return { filteredData };
 };

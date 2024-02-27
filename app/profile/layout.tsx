@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Open_Sans } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "../globals.css";
-import WrapNextTheme from "../components/WrapNextTheme";
-import WrapNextUI from "../components/WrapNextUI";
-import WrapRainbowkit from "../components/WrapRainbowKit";
 import NavigationBar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import AuthProvider from "../providers/AuthProvider";
@@ -21,30 +18,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <AuthProvider>
-        <WrapNextTheme>
-          <WrapRainbowkit>
-            <WrapNextUI>
-              {/* <body className={open.className}> */}
-              <AuthProvider>
-                <div className="light text-primary bg-background ">
-                  <div>
-                    <NavigationBar />
-                    <div className="flex flex-row gap-9">
-                      <Sidebar />
-                      <div className="container max-w-7xl  mx-auto  min-h-screen">
-                        {children}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </AuthProvider>
-              {/* </body> */}
-            </WrapNextUI>
-          </WrapRainbowkit>
-        </WrapNextTheme>
-      </AuthProvider>
-    </html>
+    // <AuthProvider>
+    <div className="light text-primary bg-secondary-foreground ">
+      <div>
+        <NavigationBar />
+        <div className="flex flex-row gap-9">
+          <Sidebar />
+          <div className="container max-w-7xl  mx-auto  min-h-screen">
+            {children}
+          </div>
+        </div>
+      </div>
+    </div>
+    // </AuthProvider>
   );
 }

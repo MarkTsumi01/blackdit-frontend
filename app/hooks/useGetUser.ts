@@ -15,8 +15,6 @@ export const useGetUser = () => {
         };
         const res = await axios.get("http://localhost:3001/api/users/", config);
         setUserdata(res.data);
-        console.log(res.data, "data");
-
         setLoading(false);
       } catch (error) {
         console.log("error", error);

@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useGetUser } from "../hooks/useGetUser";
-
 import {
   Card,
   CardHeader,
@@ -21,7 +20,7 @@ const Profile = () => {
   const { userData, loading } = useGetUser();
   const router = useRouter();
   return (
-    <main className="min-h-screen flex p-4">
+    <main className="min-h-screen flex p-4 ">
       <div className="flex gap-4  w-full ">
         <div className="w-1/5">
           <Card className="py-4 shadow-lg min-w-full w-full">
@@ -49,32 +48,31 @@ const Profile = () => {
                 <Link
                   isExternal
                   showAnchorIcon
-                  href="https://github.com/nextui-org/nextui"
+                  href="https://github.com/MarkTsumi01"
                   anchorIcon={<Github />}
                 ></Link>
                 <Link
                   isExternal
                   showAnchorIcon
-                  href="https://github.com/nextui-org/nextui"
+                  href="https://www.linkedin.com/in/kanravee-pienpikul-437a60257/"
                   anchorIcon={<LinkedIn />}
                 ></Link>
                 <Link
                   isExternal
                   showAnchorIcon
-                  href="https://github.com/nextui-org/nextui"
+                  href="https://twitter.com/TsumiMark"
                   anchorIcon={<Xtwitter />}
                 ></Link>
               </div>
             </CardBody>
           </Card>
         </div>
-        <div className=" w-4/5 p-4 rounded-large shadow-lg">
+        <div className=" w-4/5 p-4 rounded-large shadow-lg bg-background">
           <h1 className="text-large text-foreground">My Blogs</h1>
           <Divider className="mt-4" />
           <div className="mt-4 flex flex-col gap-8">
             {userData?.posts.map((blog) => (
               <div key={blog.id} className="flex justify-between ">
-                {/* <h1>{blog.title}</h1> */}
                 <Card
                   isFooterBlurred
                   radius="lg"
