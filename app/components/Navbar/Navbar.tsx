@@ -1,31 +1,23 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Button,
-  Input,
   Avatar,
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  User,
-  Switch,
 } from "@nextui-org/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ProjectLogo from "@/app/logo/ProjectLogo";
-import { useTheme } from "next-themes";
-import { SunIcon } from "@/app/icons/SunIcon";
-import { MoonIcon } from "@/app/icons/MoonIcon";
 import { useAccountModal } from "@rainbow-me/rainbowkit";
 import { useGetUser } from "@/app/hooks/useGetUser";
 import NavbarWallet from "../WalletForNavbar";
 export default function Nav() {
-  const rounter = useRouter();
   const { openAccountModal } = useAccountModal();
   const { userData, loading } = useGetUser();
 
@@ -39,12 +31,10 @@ export default function Nav() {
           <ProjectLogo />
         </Link>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-6" justify="center">
-        <NavbarWallet />
-      </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
           <div className="flex items-center gap-4">
+            <NavbarWallet />
             <Dropdown
               placement="bottom-start"
               backdrop="blur"

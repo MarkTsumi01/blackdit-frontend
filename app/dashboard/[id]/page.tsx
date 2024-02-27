@@ -6,6 +6,7 @@ import { Button, Divider, Input, User, Image, Avatar } from "@nextui-org/react";
 import axios from "axios";
 import { IBlogs } from "@/app/interfaces/blog/blogs.interface";
 import { useGetUser } from "@/app/hooks/useGetUser";
+import { useAccount } from "wagmi";
 
 const Page = () => {
   const { id } = useParams();
@@ -14,11 +15,13 @@ const Page = () => {
   const [loading, setLoading] = useState(true);
   const [commentDatas, setCommentData] = useState("");
   const { userData } = useGetUser();
+  const { address } = useAccount();
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     setAccessToken(token);
-  }, []);
+    console.log(address);
+  }, [address]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,7 +60,7 @@ const Page = () => {
         config
       );
 
-      console.log(response.data, "API Data");
+      // console.log(response.data, "API Data");
     } catch (error) {
       console.error("Error", error);
     }
@@ -78,7 +81,7 @@ const Page = () => {
   return (
     <>
       <main className="w-full h-full p-16">
-        <div className="p-6 flex flex-col gap-4 border-2 border-divider rounded-large">
+        <div className="p-6 flex flex-col gap-4 border-2 border-divider rounded-large bg-background">
           <div className="flex justify-between">
             <h1 className="flex items-center text-large">{blogByID?.title}</h1>
             <User
@@ -104,7 +107,7 @@ const Page = () => {
         </div>
         <form
           onSubmit={handleCommnetSubmit}
-          className="mt-4 border-1 border-divider flex items-center p-6 rounded-large"
+          className="mt-4 border-1 border-divider flex items-center p-6 rounded-large bg-background"
         >
           <Input
             name="comment"
@@ -124,14 +127,14 @@ const Page = () => {
           </Button>
         </form>
 
-        <div className="flex flex-col gap-4 mt-4 text-large font-bold">
+        <div className="flex flex-col gap-4 mt-4 text-large font-bold ">
           <h1 className="text-primary">All Comments</h1>
           <Divider />
         </div>
         {blogByID?.comments.map((comment) => (
           <div
             key={comment.id}
-            className="mt-4 border-1 border-divider flex items-center p-6 rounded-large"
+            className="mt-4 border-1 border-divider flex items-center p-6 rounded-large bg-background"
           >
             <div className="flex flex-col gap-4">
               <Avatar

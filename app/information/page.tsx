@@ -31,7 +31,7 @@ const InFormation = () => {
         formData,
         config
       );
-      console.log("API Response:", response.data);
+      // console.log("API Response:", response.data);
     } catch (error) {
       console.error("Error updating user:", error);
     }
@@ -41,15 +41,13 @@ const InFormation = () => {
     try {
       const imageData = new FormData();
       imageData.append("image", file);
-      console.log(typeof imageData);
-
       const response = await axios.post(
         "http://localhost:3001/api/users/upload",
         imageData,
         config
       );
       setSelectedFile(null);
-      console.log("API Response:", response.data);
+      // console.log("API Response:", response.data);
     } catch (error) {
       console.error("Error updating user:", error);
     }
@@ -81,7 +79,6 @@ const InFormation = () => {
         <Divider />
         <form onSubmit={handleFormSubmit} className="flex flex-col gap-6">
           <Input
-            color="secondary"
             isClearable
             variant="bordered"
             isRequired
@@ -94,7 +91,6 @@ const InFormation = () => {
             // onClear={() => handleClear()}
           />
           <Input
-            color="secondary"
             isClearable
             variant="bordered"
             isRequired
@@ -106,7 +102,6 @@ const InFormation = () => {
             value={formData.username}
           />
           <Input
-            color="secondary"
             isClearable
             variant="bordered"
             isRequired
@@ -117,12 +112,13 @@ const InFormation = () => {
             value={formData.role}
             onChange={handleInputChange}
           />
-          <Input
-            color="secondary"
+          <input
+            className="flex p-4 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-foreground file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            id="avatar"
+            name="avatar"
             type="file"
-            variant="bordered"
             onChange={handleFileChange}
-          />
+          ></input>
           <Button
             className="text-white font-semibold text-large "
             type="submit"

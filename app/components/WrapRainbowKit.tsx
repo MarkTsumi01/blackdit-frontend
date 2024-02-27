@@ -1,6 +1,5 @@
 "use client";
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
@@ -13,7 +12,7 @@ interface WrapRainbowkit {
 
 const config = getDefaultConfig({
   appName: "My RainbowKit App",
-  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID ?? "",
   chains: [mainnet, polygon, optimism, arbitrum, base, zora],
   ssr: true,
 });

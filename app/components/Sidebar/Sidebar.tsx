@@ -14,10 +14,8 @@ export default function Sidebar() {
   const router = useRouter();
 
   return (
-    // Sidebar
-    <div className=" text-primary-foreground flex flex-col justify-between pt-10 pb-24 shadow-lg border-r-[1px] border-divider">
+    <div className="bg-background text-primary-foreground flex flex-col justify-between pt-10 pb-24 shadow-lg border-r-[1px] border-divider">
       <div>
-        {/* Accordion next-ui   */}
         <Accordion itemClasses={{ base: "w-52" }}>
           <AccordionItem
             startContent={<ContentIcon />}
@@ -30,7 +28,6 @@ export default function Sidebar() {
               startContent: " pl-4",
             }}
           >
-            {/* Listbox next-ui  */}
             <Listbox
               aria-label="Actions"
               variant="flat"

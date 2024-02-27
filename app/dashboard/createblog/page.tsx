@@ -59,16 +59,26 @@ const CreatePost = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files);
+    if (e.target.files)
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.files && e.target.files[0],
+      });
+  };
+
+  const onClearForm = () => {
     setFormData({
-      ...formData,
-      [e.target.name]: e.target.files && e.target.files[0],
+      title: "",
+      body: "",
+      image: null,
     });
   };
 
   return (
-    <main className=" w-full h-full p-28">
-      <div className="p-4 flex flex-col gap-4 border-2 border-divider rounded-large bg-backgroundid">
+    <main className="w-full h-full p-16">
+      <div className="p-4 flex flex-col gap-4 border-2 border-divider rounded-large bg-background">
         <h1>Create Blog</h1>
         <Divider />
         <form onSubmit={handleFormSubmit} className="flex flex-col gap-1">
@@ -97,14 +107,16 @@ const CreatePost = () => {
             value={formData.body}
             onChange={handleInputChange}
           />
-          <Input
-            color="secondary"
-            type="file"
-            variant="bordered"
-            className="p-4 text-primary"
-            name="image"
-            onChange={handleFileChange}
-          />
+          <div className="p-4 w-full flex flex-col gap-2 text-foreground">
+            <label htmlFor="file">Image</label>
+            <input
+              className="flex p-4 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-foreground file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+              id="picture"
+              name="image"
+              type="file"
+              onChange={handleFileChange}
+            ></input>
+          </div>
           <div className="flex justify-end gap-2 p-4">
             <Button
               type="submit"
@@ -113,7 +125,11 @@ const CreatePost = () => {
             >
               Save
             </Button>
-            <Button color="danger" className="text-white font-bold">
+            <Button
+              onClick={() => onClearForm()}
+              color="danger"
+              className="text-white font-bold"
+            >
               Cancel
             </Button>
           </div>
