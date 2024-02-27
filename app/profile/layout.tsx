@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     // <AuthProvider>
-    <div className="light text-primary bg-secondary-foreground  ">
+    <div className="light text-primary bg-secondary-foreground ">
       <div>
         <NavigationBar />
         <div className="flex flex-row gap-9">

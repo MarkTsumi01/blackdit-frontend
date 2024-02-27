@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Open_Sans } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import WrapNextUI from "./components/WrapNextUI";
 import WrapRainbowkit from "./components/WrapRainbowKit";
 import WrapNextTheme from "./components/WrapNextTheme";
+import AuthProvider from "./providers/AuthProvider";
 
-// const inter = Inter({ subsets: ["latin"] });
 const open = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,17 +20,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <WrapNextTheme>
-        <WrapRainbowkit>
-          <WrapNextUI>
-            <body className={open.className}>
-              <main className="light text-foreground bg-background">
-                {children}
-              </main>
-            </body>
-          </WrapNextUI>
-        </WrapRainbowkit>
-      </WrapNextTheme>
+      <body className={open.className} suppressHydrationWarning>
+        <WrapNextTheme>
+          <WrapRainbowkit>
+            <AuthProvider>
+              <WrapNextUI>
+                <main className="light text-primary bg-background">
+                  {children}
+                </main>
+              </WrapNextUI>
+            </AuthProvider>
+          </WrapRainbowkit>
+        </WrapNextTheme>
+      </body>
     </html>
   );
 }
