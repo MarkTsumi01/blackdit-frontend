@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { Button, Divider, Input, Textarea } from "@nextui-org/react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const CreatePost = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     title: "",
     body: "",
@@ -25,16 +27,6 @@ const CreatePost = () => {
 
   const createPost = async () => {
     try {
-      // const postData = new FormData();
-      // postData.append("title", formData.title);
-      // postData.append("body", formData.body);
-      // postData.append("image", formData.image);
-      // const response = await axios.post(
-      //   "http://localhost:3001/api/posts/createpost",
-      //   postData,
-      //   config
-      // );
-
       const response = await axios.post(
         "http://localhost:3001/api/posts/createpost",
         {
@@ -53,6 +45,7 @@ const CreatePost = () => {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     createPost();
+    router.push("/dashboard");
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,6 +67,7 @@ const CreatePost = () => {
       body: "",
       image: null,
     });
+    router.push("/dashboard");
   };
 
   return (
