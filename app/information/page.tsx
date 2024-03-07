@@ -13,6 +13,7 @@ const InFormation = () => {
     username: "",
     role: "",
   });
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -27,7 +28,7 @@ const InFormation = () => {
   const updateUser = async () => {
     try {
       const response = await axios.put(
-        "http://localhost:3001/api/users/updateuser",
+        `${baseUrl}/users/updateuser`,
         formData,
         config
       );
@@ -42,7 +43,7 @@ const InFormation = () => {
       const imageData = new FormData();
       imageData.append("image", file);
       const response = await axios.post(
-        "http://localhost:3001/api/users/upload",
+        `${baseUrl}/users/upload`,
         imageData,
         config
       );

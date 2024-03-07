@@ -17,13 +17,13 @@ export default function AuthProvider({
 
   useEffect(() => {
     const logIn = async () => {
-      const baseurl = "http://localhost:3001/api";
-      const result = await axios.get(`${baseurl}/auth/getMessage`);
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+      const result = await axios.get(`${baseUrl}/auth/getMessage`);
       const { message } = result.data;
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const signature = await signer.signMessage(message);
-      const accessToken = await axios.post(`${baseurl}/auth/login`, {
+      const accessToken = await axios.post(`${baseUrl}/auth/login`, {
         signatures: signature,
       });
       localStorage.setItem("accessToken", accessToken?.data.data.accessToken);

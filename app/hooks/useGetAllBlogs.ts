@@ -5,6 +5,7 @@ import { IBlogs } from "../interfaces/blog/blogs.interface";
 export const useGetAllBlogs = () => {
   const [blogdata, setBlogdata] = useState<IBlogs[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,10 +14,7 @@ export const useGetAllBlogs = () => {
         const config = {
           headers: { Authorization: `Bearer ${accesstoken}` },
         };
-        const res = await axios.get(
-          "http://localhost:3001/api/posts/allposts",
-          config
-        );
+        const res = await axios.get(`${baseUrl}/posts/allposts`, config);
         setBlogdata(res.data);
         // console.log(res.data, "data");
 
@@ -27,7 +25,7 @@ export const useGetAllBlogs = () => {
     };
 
     fetchData();
-  }, []);
+  }, [baseUrl]);
 
   return { blogdata, loading };
 };

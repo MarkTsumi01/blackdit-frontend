@@ -5,6 +5,7 @@ import { IUser } from "../interfaces/user/user.interface";
 export const useGetUser = () => {
   const [userData, setUserdata] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,7 +14,7 @@ export const useGetUser = () => {
         const config = {
           headers: { Authorization: `Bearer ${accesstoken}` },
         };
-        const res = await axios.get("http://localhost:3001/api/users/", config);
+        const res = await axios.get(`${baseUrl}/users/`, config);
         setUserdata(res.data);
         setLoading(false);
       } catch (error) {
@@ -22,7 +23,7 @@ export const useGetUser = () => {
     };
 
     fetchData();
-  }, []);
+  }, [baseUrl]);
 
   return { userData, loading };
 };

@@ -12,6 +12,7 @@ const CreatePost = () => {
     image: null,
   });
   const [accessToken, setAccessToken] = useState<string | null>(null);
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -28,7 +29,7 @@ const CreatePost = () => {
   const createPost = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/posts/createpost",
+        `${baseUrl}/posts/createpost`,
         {
           title: formData.title,
           body: formData.body,

@@ -16,6 +16,7 @@ const Page = () => {
   const [commentDatas, setCommentData] = useState("");
   const { userData } = useGetUser();
   const { address } = useAccount();
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -30,7 +31,7 @@ const Page = () => {
           headers: { Authorization: `Bearer ${accessToken}` },
         };
         const res = await axios.get(
-          `http://localhost:3001/api/posts/${id}`,
+          process.env.NEXT_PUBLIC_BASE_URL + `/api/posts/${id}`,
           config
         );
         setblogByID(res.data);
@@ -52,7 +53,7 @@ const Page = () => {
   const createComment = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/comments/createcomment",
+        `${baseUrl}/comments/createcomment`,
         {
           commentText: commentDatas,
           postId: blogByID?.id,
